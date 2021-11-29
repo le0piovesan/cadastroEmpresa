@@ -6,8 +6,8 @@
         public string nome { get; set; }
         public System.DateTime dataFundacao { get; set; }
         public string razaoSocial { get; set; }
-        public bool ativa { get; set; }
-        public int cooperativa { get; set; }
+        //public bool ativa { get; set; }
+        //public int cooperativa { get; set; }
         public int funcionarios { get; set; }
         public decimal faturamento { get; set; }
         public decimal capitalSocial { get; set; }

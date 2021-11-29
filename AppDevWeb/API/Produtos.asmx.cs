@@ -1,6 +1,7 @@
 ﻿using AppDevWeb.Controller.Repositorios;
 using AppDevWeb.Modelo.Entidades;
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Web;
 using System.Web.Script.Services;
@@ -40,16 +41,16 @@ namespace AppDevWeb.API
 
         [WebMethod(EnableSession = true)]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public Produto GetProduto(long Codigo)
+        public Produto GetProduto(long codigo)
         {
-            return Controller.GetProduto(Codigo);
+            return Controller.GetProduto(codigo);
         }
 
         [WebMethod(EnableSession = true)]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public string Remover(long Codigo)
+        public string Remover(long codigo)
         {
-            Controller.Remover(Codigo);
+            Controller.Remover(codigo);
             return "OK";
         }
 
@@ -57,6 +58,8 @@ namespace AppDevWeb.API
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public string SalvarProduto(Produto prod)
         {
+            Console.WriteLine("Chegou aqui");
+            Console.WriteLine(prod);
             Controller.Salvar(prod);
             return "OK";            
         }

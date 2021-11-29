@@ -21,7 +21,7 @@ namespace AppDevWeb.Controller.Repositorios
                     {
                         produto.nome = Prod.nome;
                         produto.descricao = Prod.descricao;
-                        produto.ativa = Prod.ativa;
+                        //produto.ativa = Prod.ativa;
                         produto.dataFundacao = Prod.dataFundacao;
                     }
         }

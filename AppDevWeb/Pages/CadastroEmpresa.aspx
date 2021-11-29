@@ -37,7 +37,7 @@ type="text/javascript"></script>
       />
     </div>
 
-    <div class="col-sm-2 containerCheckbox">
+   <%-- <div class="col-sm-2 containerCheckbox">
       <p>Ativa</p>
       <input
         type="checkbox"
@@ -55,7 +55,7 @@ type="text/javascript"></script>
         id="inputCooperativa"
         class="form-check-input"
       />
-    </div>
+    </div>--%>
   </div>
 
   <div class="row">

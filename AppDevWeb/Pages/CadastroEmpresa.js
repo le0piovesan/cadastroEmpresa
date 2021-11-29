@@ -5,18 +5,19 @@
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data) {
+            console.log(data)
             limparCampos();
             carregarProdutos();
         },
-        failure: function (msg) { alert(msg); },
+        failure: function (msg) { console.log(msg); },
         data: JSON.stringify({
             prod: {
                 codigo: $("#inputCod").val(),
                 nome: $("#inputNome").val(),
                 dataFundacao: $("#inputData").val(),
                 razaoSocial: $("#inputRazao").val(),
-                ativa: $("#inputAtiva").is(":checked"),
-                cooperativa: $("#inputCooperativa").is(":checked"),
+                //ativa: $("#inputAtiva").is(":checked"),
+                //cooperativa: $("#inputCooperativa").is(":checked"),
                 funcionarios: $("#inputFuncionarios").val(),
                 faturamento: $("#inputFaturamento").val(),
                 capitalSocial: $("#inputCapital").val(),
@@ -39,8 +40,8 @@ function limparCampos() {
     $("#inputNome").val("");
     $("#inputData").val("");
     $("#inputRazao").val("");
-    $("#inputAtiva").val("");
-    $("#inputCooperativa").val("");
+    //$("#inputAtiva").val("");
+    //$("#inputCooperativa").val("");
     $("#inputFuncionarios").val("");
     $("#inputFaturamento").val("");
     $("#inputCapital").val("");
@@ -62,6 +63,7 @@ function carregarProdutos() {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data) {
+            console.log(data)
             $("#grid_produtos tbody").html("");
             var produtos = data.d;
 
@@ -70,7 +72,7 @@ function carregarProdutos() {
                     "<td>" + produtos[i].codigo + "</td>" +
                     "<td>" + produtos[i].nome + "</td>" +
                     "<td>" + produtos[i].descricao + "</td>" +
-                    "<td>" + produtos[i].ativa + "</td>" +
+                    //"<td>" + produtos[i].ativa + "</td>" +
                     "<td>" + produtos[i].dataFundacao + "</td>" +
                     "<td>" +
                     " <button type='button' " +
@@ -87,7 +89,7 @@ function carregarProdutos() {
             adicionaEventoEditar();
             adicionaEventoRemover();
         },
-        failure: function (msg) { alert(msg); },
+        failure: function (msg) { console.log(msg); },
         data: {}
     });
 }
@@ -106,8 +108,8 @@ function adicionaEventoEditar() {
                 $("#inputNome").val(Produto.nome),
                 $("#inputData").val(Produto.dataFundacao),
                 $("#inputRazao").val(Produto.razaoSocial),
-                $("#inputAtiva").is(":checked"),
-                $("#inputCooperativa").is(":checked"),
+                //$("#inputAtiva").is(":checked"),
+                //$("#inputCooperativa").is(":checked"),
                 $("#inputFuncionarios").val(Produto.funcionarios),
                 $("#inputFaturamento").val(Produto.faturamento),
                 $("#inputCapital").val(Produto.capitalSocial),
