@@ -76,7 +76,7 @@ function carregarProdutos() {
                     "<td>" + produtos[i].dataFundacao + "</td>" +
                     "<td>" +
                     " <button type='button' " +
-                    "         class='btn btn-xs btn-primary btn-editar' " +
+                    "         class='btn btn-xs btn-secondary btn-editar' " +
                     "         data-codigo='" + produtos[i].codigo + "'" +
                     ">Editar</button> " +
                     " <button type='button' " +

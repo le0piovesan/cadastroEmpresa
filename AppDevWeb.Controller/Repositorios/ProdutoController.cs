@@ -31,15 +31,15 @@ namespace AppDevWeb.Controller.Repositorios
             return Produtos;
         }
 
-        public void Remover(long Codigo)
+        public void Remover(long codigo)
         {
-            Produtos = Produtos.Where(o => o.codigo != Codigo)
+            Produtos = Produtos.Where(o => o.codigo != codigo)
                                .ToList();
         }
 
-        public Produto GetProduto(long Codigo)
+        public Produto GetProduto(long codigo)
         {
-            return Produtos.FirstOrDefault(o => o.codigo == Codigo);
+            return Produtos.FirstOrDefault(o => o.codigo == codigo);
         }
     }
 }
