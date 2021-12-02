@@ -11,7 +11,7 @@
         public int funcionarios { get; set; }
         public decimal faturamento { get; set; }
         public decimal capitalSocial { get; set; }
-        public int inscricaoEstadual { get; set; }
+        public string inscricaoEstadual { get; set; }
         public string cnpj { get; set; }
         public string cidade { get; set; }
         public string cep { get; set; }

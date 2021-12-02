@@ -18,8 +18,8 @@
                         <tr>
                             <th>Código</th>
                             <th>Nome</th>
-                            <th>Ativa</th>
                             <th>Data de Cadastro</th>
+                            <th>Descrição</th>
                             <th>Ações</th>
                         </tr>
                     </thead>

@@ -20,6 +20,7 @@ type="text/javascript"></script>
       <label for="inputNome">Nome Fantasia</label>
       <input class="form-control" type="text" name="inputNome" id="inputNome" />
     </div>
+
     <div class="col-sm-2">
       <label for="inputData">Data Fundação</label>
       <input class="form-control" type="date" name="inputData" id="inputData" />
