@@ -71,7 +71,6 @@ function carregarProdutos() {
                 $("#grid_produtos tbody").append("<tr>" +
                     "<td>" + produtos[i].codigo + "</td>" +
                     "<td>" + produtos[i].nome + "</td>" +
-                    "<td>" + produtos[i].descricao + "</td>" +
                     //"<td>" + produtos[i].ativa + "</td>" +
                     "<td>" + convertToJavaScriptDate(produtos[i].dataFundacao) + "</td>" +
                     "<td>" +
@@ -92,13 +91,6 @@ function carregarProdutos() {
         failure: function (msg) { console.log(msg); },
         data: {}
     });
-}
-
-function convertToJavaScriptDate(value) {
-    var pattern = /Date\(([^)]+)\)/;
-    var results = pattern.exec(value);
-    var dt = new Date(parseFloat(results[1]));
-    return (dt.getMonth() + 1) + "/" + dt.getDate() + "/" + dt.getFullYear();
 }
 
 function adicionaEventoEditar() {
@@ -157,4 +149,12 @@ $(document).ready(function () {
     carregarProdutos();
 
     $(document).on("click", "#btn_salvar", salvar);
+
 });
+
+function convertToJavaScriptDate(value) {
+    var pattern = /Date\(([^)]+)\)/;
+    var results = pattern.exec(value);
+    var dt = new Date(parseFloat(results[1]));
+    return dt.getDate() + "/" + (dt.getMonth() + 1) + "/" + dt.getFullYear();
+}
