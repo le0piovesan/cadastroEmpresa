@@ -1,17 +1,17 @@
 ﻿function salvar() {
     $.ajax({
         type: "POST",
-        url: "https://localhost:44332/API/Produtos.asmx/SalvarProduto",
+        url: "https://localhost:44332/API/Empresas.asmx/SalvarEmpresa",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data) {
             console.log(data)
             limparCampos();
-            carregarProdutos();
+            carregarEmpresas();
         },
         failure: function (msg) { console.log(msg); },
         data: JSON.stringify({
-            prod: {
+            emp: {
                 codigo: $("#inputCod").val(),
                 nome: $("#inputNome").val(),
                 dataFundacao: $("#inputData").val(),
@@ -56,31 +56,31 @@ function limparCampos() {
     $("#inputTelefone").val("");
 }
 
-function carregarProdutos() {
+function carregarEmpresas() {
     $.ajax({
         type: "GET",
-        url: "https://localhost:44332/API/Produtos.asmx/ListarProdutos",
+        url: "https://localhost:44332/API/Empresas.asmx/ListarEmpresas",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data) {
             console.log(data)
-            $("#grid_produtos tbody").html("");
-            var produtos = data.d;
+            $("#grid_empresas tbody").html("");
+            var empresas = data.d;
 
-            for (var i = 0; i < produtos.length; i++) {
-                $("#grid_produtos tbody").append("<tr>" +
-                    "<td>" + produtos[i].codigo + "</td>" +
-                    "<td>" + produtos[i].nome + "</td>" +
-                    //"<td>" + produtos[i].ativa + "</td>" +
-                    "<td>" + convertToJavaScriptDate(produtos[i].dataFundacao) + "</td>" +
+            for (var i = 0; i < empresas.length; i++) {
+                $("#grid_empresas tbody").append("<tr>" +
+                    "<td>" + empresas[i].codigo + "</td>" +
+                    "<td>" + empresas[i].nome + "</td>" +
+                    //"<td>" + empresas[i].ativa + "</td>" +
+                    "<td>" + convertToJavaScriptDate(empresas[i].dataFundacao) + "</td>" +
                     "<td>" +
                     " <button type='button' " +
                     "         class='btn btn-xs btn-secondary btn-editar' " +
-                    "         data-codigo='" + produtos[i].codigo + "'" +
+                    "         data-codigo='" + empresas[i].codigo + "'" +
                     ">Editar</button> " +
                     " <button type='button' " +
                     "         class='btn btn-xs btn-danger btn-remover' " +
-                    "         data-codigo='" + produtos[i].codigo + "'" +
+                    "         data-codigo='" + empresas[i].codigo + "'" +
                     ">Remover</button > " +
                     "</td > " +
                     "</tr>");
@@ -98,29 +98,29 @@ function adicionaEventoEditar() {
         var codigo = $(this).data("codigo");
         $.ajax({
             type: "POST",
-            url: "https://localhost:44332/API/Produtos.asmx/GetProduto",
+            url: "https://localhost:44332/API/Empresas.asmx/GetEmpresa",
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (data) {
-                var Produto = data.d;
-                $("#inputCod").val(Produto.codigo),
-                $("#inputNome").val(Produto.nome),
-                $("#inputData").val(Produto.dataFundacao),
-                $("#inputRazao").val(Produto.razaoSocial),
+                var Empresa = data.d;
+                $("#inputCod").val(Empresa.codigo),
+                $("#inputNome").val(Empresa.nome),
+                $("#inputData").val(Empresa.dataFundacao),
+                $("#inputRazao").val(Empresa.razaoSocial),
                 //$("#inputAtiva").is(":checked"),
                 //$("#inputCooperativa").is(":checked"),
-                $("#inputFuncionarios").val(Produto.funcionarios),
-                $("#inputFaturamento").val(Produto.faturamento),
-                $("#inputCapital").val(Produto.capitalSocial),
-                $("#inputInscricao").val(Produto.inscricaoEstadual),
-                $("#inputCNPJ").val(Produto.cnpj),
-                $("#inputCidade").val(Produto.cidade),
-                $("#inputCEP").val(Produto.cep),
-                $("#inputBairro").val(Produto.bairro),
-                $("#inputEndereco").val(Produto.endereco),
-                $("#inputDescricao").val(Produto.descricao),
-                $("#inputEmail").val(Produto.email),
-                $("#inputTelefone").val(Produto.telefone)
+                $("#inputFuncionarios").val(Empresa.funcionarios),
+                $("#inputFaturamento").val(Empresa.faturamento),
+                $("#inputCapital").val(Empresa.capitalSocial),
+                $("#inputInscricao").val(Empresa.inscricaoEstadual),
+                $("#inputCNPJ").val(Empresa.cnpj),
+                $("#inputCidade").val(Empresa.cidade),
+                $("#inputCEP").val(Empresa.cep),
+                $("#inputBairro").val(Empresa.bairro),
+                $("#inputEndereco").val(Empresa.endereco),
+                $("#inputDescricao").val(Empresa.descricao),
+                $("#inputEmail").val(Empresa.email),
+                $("#inputTelefone").val(Empresa.telefone)
             },
             failure: function (msg) { alert(msg); },
             data: JSON.stringify({ Codigo: codigo })
@@ -133,11 +133,11 @@ function adicionaEventoRemover() {
         var codigo = $(this).data("codigo");
         $.ajax({
             type: "POST",
-            url: "https://localhost:44332/API/Produtos.asmx/Remover",
+            url: "https://localhost:44332/API/Empresas.asmx/Remover",
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (data) {
-                carregarProdutos();
+                carregarEmpresas();
             },
             failure: function (msg) { alert(msg); },
             data: JSON.stringify({ Codigo: codigo })
@@ -146,7 +146,7 @@ function adicionaEventoRemover() {
 }
 
 $(document).ready(function () {
-    carregarProdutos();
+    carregarEmpresas();
 
     $(document).on("click", "#btn_salvar", salvar);
 

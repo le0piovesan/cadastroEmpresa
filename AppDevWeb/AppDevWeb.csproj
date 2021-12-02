@@ -70,7 +70,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="API\Produtos.asmx" />
+    <Content Include="API\Empresas.asmx" />
     <Content Include="Global.asax" />
     <Content Include="Login.aspx" />
     <Content Include="Login.js" />
@@ -1731,8 +1731,8 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="API\Produtos.asmx.cs">
-      <DependentUpon>Produtos.asmx</DependentUpon>
+    <Compile Include="API\Empresas.asmx.cs">
+      <DependentUpon>Empresas.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Global.asax.cs">

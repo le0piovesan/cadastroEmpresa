@@ -42,7 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositorios\ProdutoController.cs" />
+    <Compile Include="Repositorios\EmpresaController.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AppDevWeb.Modelo\AppDevWeb.Modelo.csproj">

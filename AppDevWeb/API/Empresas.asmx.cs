@@ -11,39 +11,39 @@ using System.Web.SessionState;
 namespace AppDevWeb.API
 {
     [ScriptService]
-    public class Produtos : System.Web.Services.WebService, IRequiresSessionState
+    public class Empresas : System.Web.Services.WebService, IRequiresSessionState
     {
-        private ProdutoController Controller
+        private EmpresaController Controller
         {
             get
             {
                 if (HttpContext.Current
-                               .Session["CONTROLLER_PRODUTO"] == null)
+                               .Session["CONTROLLER_EMPRESA"] == null)
                     HttpContext.Current
-                               .Session["CONTROLLER_PRODUTO"] = new ProdutoController();
+                               .Session["CONTROLLER_EMPRESA"] = new EmpresaController();
 
                 return HttpContext.Current
-                               .Session["CONTROLLER_PRODUTO"] as ProdutoController;
+                               .Session["CONTROLLER_EMPRESA"] as EmpresaController;
             }
             set 
             {
-                HttpContext.Current.Session["CONTROLLER_PRODUTO"] = value;
+                HttpContext.Current.Session["CONTROLLER_EMPRESA"] = value;
             }        
         }
 
         [WebMethod(EnableSession = true)]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json,
                       UseHttpGet = true)]
-        public List<Produto> ListarProdutos()
+        public List<Empresa> ListarEmpresas()
         {
-            return Controller.GetProdutos();
+            return Controller.GetEmpresas();
         }
 
         [WebMethod(EnableSession = true)]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public Produto GetProduto(long codigo)
+        public Empresa GetEmpresa(long codigo)
         {
-            return Controller.GetProduto(codigo);
+            return Controller.GetEmpresa(codigo);
         }
 
         [WebMethod(EnableSession = true)]
@@ -56,11 +56,11 @@ namespace AppDevWeb.API
 
         [WebMethod(EnableSession = true)]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public string SalvarProduto(Produto prod)
+        public string SalvarEmpresa(Empresa emp)
         {
             Console.WriteLine("Chegou aqui");
-            Console.WriteLine(prod);
-            Controller.Salvar(prod);
+            Console.WriteLine(emp);
+            Controller.Salvar(emp);
             return "OK";            
         }
     }

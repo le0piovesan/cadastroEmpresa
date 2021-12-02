@@ -11,7 +11,7 @@ namespace AppDevWeb.Pages
 {
 
 
-    public partial class CadastroProduto
+    public partial class CadastroEmpresa
     {
     }
 }

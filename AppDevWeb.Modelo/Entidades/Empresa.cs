@@ -1,6 +1,6 @@
 ﻿namespace AppDevWeb.Modelo.Entidades
 {
-    public class Produto
+    public class Empresa
     {
         public long codigo { get; set; }
         public string nome { get; set; }
@@ -25,7 +25,7 @@
 
 
 
-        public Produto()
+        public Empresa()
         {
         }
     }

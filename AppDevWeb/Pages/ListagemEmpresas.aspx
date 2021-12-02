@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Page.Master"
     AutoEventWireup="true"
     CodeBehind="ListagemEmpresas.aspx.cs"
-    Inherits="AppDevWeb.Pages.CadastroProduto" %>
+    Inherits="AppDevWeb.Pages.CadastroEmpresa" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -13,7 +13,7 @@
     <div class="form-group">
         <div class="row">
             <div class="col-md-12">
-                <table id="grid_produtos" class="table">
+                <table id="grid_empresas" class="table">
                     <thead>
                         <tr>
                             <th>Código</th>
