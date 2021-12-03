@@ -75,6 +75,10 @@ function carregarEmpresas() {
                     "<td>" + convertToJavaScriptDate(empresas[i].dataFundacao) + "</td>" +
                     "<td>" +
                     " <button type='button' " +
+                    "         class='btn btn-xs btn-primary btn-filiais' " +
+                    "         data-codigo='" + empresas[i].codigo + "'" +
+                    ">Fliais</button > " +
+                    " <button type='button' " +
                     "         class='btn btn-xs btn-secondary btn-editar' " +
                     "         data-codigo='" + empresas[i].codigo + "'" +
                     ">Editar</button> " +
@@ -87,6 +91,7 @@ function carregarEmpresas() {
             }
             adicionaEventoEditar();
             adicionaEventoRemover();
+            adicionarEventoFiliais();
         },
         failure: function (msg) { console.log(msg); },
         data: {}
@@ -102,7 +107,10 @@ function adicionaEventoEditar() {
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (data) {
-                var Empresa = data.d;
+                //window.location.href = '/Pages/CadastroEmpresa.aspx';
+
+                var Empresa = data.d
+                console.log(Empresa);
                 $("#inputCod").val(Empresa.codigo),
                 $("#inputNome").val(Empresa.nome),
                 $("#inputData").val(Empresa.dataFundacao),
@@ -123,7 +131,7 @@ function adicionaEventoEditar() {
                 $("#inputTelefone").val(Empresa.telefone)
             },
             failure: function (msg) { alert(msg); },
-            data: JSON.stringify({ Codigo: codigo })
+            data: JSON.stringify({ codigo: codigo })
         });
     });
 }
@@ -136,13 +144,22 @@ function adicionaEventoRemover() {
             url: "https://localhost:44332/API/Empresas.asmx/Remover",
             contentType: "application/json; charset=utf-8",
             dataType: "json",
+            data: JSON.stringify({ codigo: codigo }),
             success: function (data) {
                 carregarEmpresas();
             },
-            failure: function (msg) { alert(msg); },
-            data: JSON.stringify({ Codigo: codigo })
+            failure: function (msg) {
+                alert(msg);
+                console.log(codigo);
+            },
         });
     });    
+}
+
+function adicionarEventoFiliais() {
+    $(document).on("click", ".btn-filiais", function () {
+        window.location.href = '/Pages/Filiais.aspx';
+    });
 }
 
 $(document).ready(function () {

@@ -1,8 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace AppDevWeb.Modelo.Entidades
 {
-    public class Empresa
+    public class Filiais
     {
         public long codigo { get; set; }
         public string nome { get; set; }
@@ -22,12 +26,7 @@ namespace AppDevWeb.Modelo.Entidades
         public string descricao { get; set; }
         public string email { get; set; }
         public string telefone { get; set; }
-        public List<Filiais> filiais { get; set; }
 
-
-
-        public Empresa()
-        {
-        }
+        public Filiais() { }
     }
 }

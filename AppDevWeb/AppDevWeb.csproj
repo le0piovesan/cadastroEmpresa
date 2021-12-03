@@ -74,6 +74,7 @@
     <Content Include="Global.asax" />
     <Content Include="Login.aspx" />
     <Content Include="Login.js" />
+    <Content Include="Pages\Filiais.aspx" />
     <Content Include="Pages\CadastroEmpresa.aspx" />
     <Content Include="Pages\ListagemEmpresas.aspx" />
     <Content Include="Pages\CadastroEmpresa.js" />
@@ -1751,6 +1752,13 @@
     </Compile>
     <Compile Include="Page.Master.designer.cs">
       <DependentUpon>Page.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Filiais.aspx.cs">
+      <DependentUpon>Filiais.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Filiais.aspx.designer.cs">
+      <DependentUpon>Filiais.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\CadastroEmpresa.aspx.cs">
       <DependentUpon>CadastroEmpresa.aspx</DependentUpon>
