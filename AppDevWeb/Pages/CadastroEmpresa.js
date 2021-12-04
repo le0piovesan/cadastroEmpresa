@@ -5,7 +5,6 @@
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data) {
-            console.log(data)
             limparCampos();
             carregarEmpresas();
         },
@@ -18,6 +17,39 @@
                 razaoSocial: $("#inputRazao").val(),
                 //ativa: $("#inputAtiva").is(":checked"),
                 //cooperativa: $("#inputCooperativa").is(":checked"),
+                funcionarios: $("#inputFuncionarios").val(),
+                faturamento: $("#inputFaturamento").val(),
+                capitalSocial: $("#inputCapital").val(),
+                inscricaoEstadual: $("#inputInscricao").val(),
+                cnpj: $("#inputCNPJ").val(),
+                cidade: $("#inputCidade").val(),
+                cep: $("#inputCEP").val(),
+                bairro: $("#inputBairro").val(),
+                endereco: $("#inputEndereco").val(),
+                descricao: $("#inputDescricao").val(),
+                email: $("#inputEmail").val(),
+                telefone: $("#inputTelefone").val(),
+            },
+        })
+    });
+}
+
+function salvarEditar() {
+    $.ajax({
+        type: "POST",
+        url: "https://localhost:44332/API/Empresas.asmx/SalvarEmpresa",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (data) {
+            $("#modalEditar").modal("hide");
+            carregarEmpresas();
+        },
+        failure: function (msg) { console.log(msg); },
+        data: JSON.stringify({
+            emp: {
+                codigo: $("#inputCod").val(),
+                nome: $("#inputNome").val(),
+                razaoSocial: $("#inputRazao").val(),
                 funcionarios: $("#inputFuncionarios").val(),
                 faturamento: $("#inputFaturamento").val(),
                 capitalSocial: $("#inputCapital").val(),
@@ -63,7 +95,6 @@ function carregarEmpresas() {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data) {
-            console.log(data)
             $("#grid_empresas tbody").html("");
             var empresas = data.d;
 
@@ -71,7 +102,6 @@ function carregarEmpresas() {
                 $("#grid_empresas tbody").append("<tr>" +
                     "<td>" + empresas[i].codigo + "</td>" +
                     "<td>" + empresas[i].nome + "</td>" +
-                    //"<td>" + empresas[i].ativa + "</td>" +
                     "<td>" + convertToJavaScriptDate(empresas[i].dataFundacao) + "</td>" +
                     "<td>" +
                     " <button type='button' " +
@@ -101,19 +131,21 @@ function carregarEmpresas() {
 function adicionaEventoEditar() {
     $(document).on("click", ".btn-editar", function () {
         var codigo = $(this).data("codigo");
+
+
         $.ajax({
             type: "POST",
             url: "https://localhost:44332/API/Empresas.asmx/GetEmpresa",
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (data) {
-                //window.location.href = '/Pages/CadastroEmpresa.aspx';
+                $("#modalEditar").modal("show");
 
                 var Empresa = data.d
                 console.log(Empresa);
                 $("#inputCod").val(Empresa.codigo),
                 $("#inputNome").val(Empresa.nome),
-                $("#inputData").val(Empresa.dataFundacao),
+                $("#inputData").val(convertToJavaScriptDate(Empresa.dataFundacao)),
                 $("#inputRazao").val(Empresa.razaoSocial),
                 //$("#inputAtiva").is(":checked"),
                 //$("#inputCooperativa").is(":checked"),
@@ -133,8 +165,9 @@ function adicionaEventoEditar() {
             failure: function (msg) { alert(msg); },
             data: JSON.stringify({ codigo: codigo })
         });
-    });
+   });
 }
+
 
 function adicionaEventoRemover() {
     $(document).on("click", ".btn-remover", function () {
@@ -166,6 +199,8 @@ $(document).ready(function () {
     carregarEmpresas();
 
     $(document).on("click", "#btn_salvar", salvar);
+    $(document).on("click", "#btn_salvarEditar", salvarEditar);
+
 
 });
 

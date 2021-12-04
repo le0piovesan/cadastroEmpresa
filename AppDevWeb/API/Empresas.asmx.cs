@@ -63,5 +63,15 @@ namespace AppDevWeb.API
             Controller.Salvar(emp);
             return "OK";            
         }
+
+        [WebMethod(EnableSession = true)]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public string SalvarEditarEmpresa(Empresa emp)
+        {
+            Console.WriteLine("Chegou aqui");
+            Console.WriteLine(emp);
+            Controller.SalvarEditar(emp);
+            return "OK";
+        }
     }
 }
