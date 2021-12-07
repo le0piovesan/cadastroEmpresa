@@ -14,6 +14,7 @@ type="text/javascript"></script>
         type="text"
         name="inputCod"
         id="inputCod"
+        disabled
       />
     </div>
     <div class="col-sm-8">

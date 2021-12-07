@@ -49,5 +49,11 @@ namespace AppDevWeb.Controller.Repositorios
             Empresa.Empresas = Empresa.Empresas.Where(o => o.codigo != codigo)
                                .ToList();
         }
+
+        public int Contar()
+        {
+            int total = Empresa.Empresas.Count;
+            return total;
+        }
     }
 }

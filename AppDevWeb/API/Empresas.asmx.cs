@@ -40,6 +40,14 @@ namespace AppDevWeb.API
         }
 
         [WebMethod(EnableSession = true)]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json,
+                      UseHttpGet = true)]
+        public int ContarEmpresas()
+        {
+            return Controller.Contar();
+        }
+
+        [WebMethod(EnableSession = true)]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public Empresa GetEmpresa(long codigo)
         {

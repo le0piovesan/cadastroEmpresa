@@ -61,8 +61,6 @@ namespace AppDevWeb.API
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public string SalvarFilial(long codigoMatriz, Filial filial)
         {
-            Console.WriteLine(codigoMatriz);
-            Console.WriteLine("asoidasiod" + filial);
             FilialController filialController = new FilialController();
             filialController.Salvar(codigoMatriz, filial);
             return "OK";

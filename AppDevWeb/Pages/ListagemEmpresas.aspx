@@ -18,7 +18,8 @@
                         <tr>
                             <th>Código</th>
                             <th>Nome</th>
-                            <th>Data de Cadastro</th>
+                            <th>Data de Fundação</th>
+                            <th>CNPJ</th>
                             <th>Ações</th>
                         </tr>
                     </thead>

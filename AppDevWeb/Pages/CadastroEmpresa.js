@@ -1,10 +1,65 @@
-﻿function salvar() {
+﻿let quantidadeEmpresas = 0;
+
+
+if (getCookie("codigoEmp") == "") {
+    setCookie("codigoEmp", 1, 7);
+}
+let countEmp = getCookie("codigoEmp");
+
+function setCookie(cname, cvalue, exdays) {
+    const d = new Date();
+    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+    let expires = "expires=" + d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+function getCookie(cname) {
+    let name = cname + "=";
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let ca = decodedCookie.split(';');
+    for (let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+
+function verificarEmpresas() {
+    $.ajax({
+        type: "GET",
+        url: "https://localhost:44332/API/Empresas.asmx/ContarEmpresas",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        data: {},
+        success: function (data) {
+            quantidadeEmpresas = data.d
+
+            if (quantidadeEmpresas === 0) {
+                setCookie("codigoEmp", 0, -1);
+                setCookie("codigoFilial", 0, -1);
+            }
+
+            },
+            failure: function (msg) {
+                alert(msg);
+            },
+        });
+}
+
+function salvar() {
     $.ajax({
         type: "POST",
         url: "https://localhost:44332/API/Empresas.asmx/SalvarEmpresa",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data) {
+            countEmp = parseInt(countEmp) + 1;
+            setCookie("codigoEmp", countEmp, 7);
             limparCampos();
             carregarEmpresas();
             $("#modalEditar").modal("hide");
@@ -12,7 +67,7 @@
         failure: function (msg) { console.log(msg); },
         data: JSON.stringify({
             emp: {
-                codigo: $("#inputCod").val(),
+                codigo: countEmp,
                 nome: $("#inputNome").val(),
                 dataFundacao: $("#inputData").val(),
                 razaoSocial: $("#inputRazao").val(),
@@ -34,6 +89,7 @@
 }
 
 function limparCampos() {
+    $("#inputCod").val("");
     $("#inputNome").val("");
     $("#inputData").val("");
     $("#inputRazao").val("");
@@ -52,6 +108,9 @@ function limparCampos() {
 }
 
 function carregarEmpresas() {
+    verificarEmpresas();
+
+    $("#inputCod").val(countEmp),
     $.ajax({
         type: "GET",
         url: "https://localhost:44332/API/Empresas.asmx/ListarEmpresas",
@@ -66,6 +125,7 @@ function carregarEmpresas() {
                     "<td>" + empresas[i].codigo + "</td>" +
                     "<td>" + empresas[i].nome + "</td>" +
                     "<td>" + convertToJavaScriptDate(empresas[i].dataFundacao) + "</td>" +
+                    "<td>" + empresas[i].cnpj + "</td>" +
                     "<td>" +
                     " <button type='button' " +
                     "         class='btn btn-xs btn-primary btn-filiais' " +
@@ -172,7 +232,7 @@ function adicionarEventoFiliais() {
 
 $(document).ready(function () {
     carregarEmpresas();
-
+    
     $(document).on("click", "#btn_salvar", salvar);
     $(document).on("click", "#btn_salvarEditar", salvar);
 

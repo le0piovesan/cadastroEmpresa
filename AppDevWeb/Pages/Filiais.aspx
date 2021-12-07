@@ -169,8 +169,9 @@
                     <thead>
                         <tr>
                             <th>Código</th>
-                            <th>Descrição</th>
-                            <th>Preço de Venda</th>
+                            <th>Nome</th>
+                            <th>Data de Fundação</th>
+                            <th>CNPJ
                             <th>Ações</th>
                         </tr>
                     </thead>

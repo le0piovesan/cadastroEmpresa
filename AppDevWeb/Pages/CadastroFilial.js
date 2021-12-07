@@ -1,4 +1,30 @@
-﻿var count_cod = 1;
+﻿if (getCookie("codigoFilial") == "") {
+    setCookie("codigoFilial", 1, 7);
+}
+let countFilial = getCookie("codigoFilial");
+
+function setCookie(cname, cvalue, exdays) {
+    const d = new Date();
+    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+    let expires = "expires=" + d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    }
+
+function getCookie(cname) {
+    let name = cname + "=";
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let ca = decodedCookie.split(';');
+    for (let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
 
 function salvar() {
     var url_string = window.location.href;
@@ -10,8 +36,8 @@ function salvar() {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data) {
-            count_cod = count_cod + 1;
-            console.log(data)
+            countFilial = parseInt(countFilial) + 1;
+            setCookie("codigoFilial", countFilial, 7);
             limparCampos();
             carregarFiliais();
         },
@@ -19,7 +45,7 @@ function salvar() {
         data: JSON.stringify({
             codigoMatriz: codigo,
             filial: {
-                codigo: count_cod,
+                codigo: countFilial,
                 nome: $("#inputFilialNome").val(),
                 dataFundacao: $("#inputFilialData").val(),
                 razaoSocial: $("#inputFilialRazao").val(),
@@ -59,13 +85,12 @@ function limparCampos() {
     $("#inputFilialTelefone").val("");
 }
 
-function carregarFiliais() {
-    $("#inputFilialCod").val(count_cod);
-
+function carregarFiliais() {  
+    $("#inputFilialCod").val(countFilial);
     var url_string = window.location.href;
     var url = new URL(url_string);
     var codigo = url.searchParams.get("codigoEmpresa");
-    console.log(codigo);
+
     $.ajax({
         type: "GET",
         url: "https://localhost:44332/API/Filiais.asmx/ListarFiliais",
@@ -82,6 +107,7 @@ function carregarFiliais() {
                         "<td>" + filiais[i].codigo + "</td>" +
                         "<td>" + filiais[i].nome + "</td>" +
                         "<td>" + convertToJavaScriptDate(filiais[i].dataFundacao) + "</td>" +
+                        "<td>" + filiais[i].cnpj + "</td>" +
                         "<td>" +
                         " <button type='button' " +
                         "         class='btn btn-xs btn-secondary btn-editar-filial' " +
