@@ -7,6 +7,7 @@
         success: function (data) {
             limparCampos();
             carregarEmpresas();
+            $("#modalEditar").modal("hide");
         },
         failure: function (msg) { console.log(msg); },
         data: JSON.stringify({
@@ -14,41 +15,6 @@
                 codigo: $("#inputCod").val(),
                 nome: $("#inputNome").val(),
                 dataFundacao: $("#inputData").val(),
-                razaoSocial: $("#inputRazao").val(),
-                //ativa: $("#inputAtiva").is(":checked"),
-                //cooperativa: $("#inputCooperativa").is(":checked"),
-                funcionarios: $("#inputFuncionarios").val(),
-                faturamento: $("#inputFaturamento").val(),
-                capitalSocial: $("#inputCapital").val(),
-                inscricaoEstadual: $("#inputInscricao").val(),
-                cnpj: $("#inputCNPJ").val(),
-                cidade: $("#inputCidade").val(),
-                cep: $("#inputCEP").val(),
-                bairro: $("#inputBairro").val(),
-                endereco: $("#inputEndereco").val(),
-                descricao: $("#inputDescricao").val(),
-                email: $("#inputEmail").val(),
-                telefone: $("#inputTelefone").val(),
-            },
-        })
-    });
-}
-
-function salvarEditar() {
-    $.ajax({
-        type: "POST",
-        url: "https://localhost:44332/API/Empresas.asmx/SalvarEmpresa",
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: function (data) {
-            $("#modalEditar").modal("hide");
-            carregarEmpresas();
-        },
-        failure: function (msg) { console.log(msg); },
-        data: JSON.stringify({
-            emp: {
-                codigo: $("#inputCod").val(),
-                nome: $("#inputNome").val(),
                 razaoSocial: $("#inputRazao").val(),
                 funcionarios: $("#inputFuncionarios").val(),
                 faturamento: $("#inputFaturamento").val(),
@@ -68,12 +34,9 @@ function salvarEditar() {
 }
 
 function limparCampos() {
-    $("#inputCod").val("");
     $("#inputNome").val("");
     $("#inputData").val("");
     $("#inputRazao").val("");
-    //$("#inputAtiva").val("");
-    //$("#inputCooperativa").val("");
     $("#inputFuncionarios").val("");
     $("#inputFaturamento").val("");
     $("#inputCapital").val("");
@@ -136,6 +99,7 @@ function adicionaEventoEditar() {
         $.ajax({
             type: "POST",
             url: "https://localhost:44332/API/Empresas.asmx/GetEmpresa",
+            data: JSON.stringify({ codigo: codigo }),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (data) {
@@ -147,8 +111,6 @@ function adicionaEventoEditar() {
                 $("#inputNome").val(Empresa.nome),
                 $("#inputData").val(convertToJavaScriptDate(Empresa.dataFundacao)),
                 $("#inputRazao").val(Empresa.razaoSocial),
-                //$("#inputAtiva").is(":checked"),
-                //$("#inputCooperativa").is(":checked"),
                 $("#inputFuncionarios").val(Empresa.funcionarios),
                 $("#inputFaturamento").val(Empresa.faturamento),
                 $("#inputCapital").val(Empresa.capitalSocial),
@@ -162,8 +124,7 @@ function adicionaEventoEditar() {
                 $("#inputEmail").val(Empresa.email),
                 $("#inputTelefone").val(Empresa.telefone)
             },
-            failure: function (msg) { alert(msg); },
-            data: JSON.stringify({ codigo: codigo })
+            failure: function (msg) { alert(msg); }
         });
    });
 }
@@ -190,8 +151,22 @@ function adicionaEventoRemover() {
 }
 
 function adicionarEventoFiliais() {
-    $(document).on("click", ".btn-filiais", function () {
-        window.location.href = '/Pages/Filiais.aspx';
+    $(document).on("click", ".btn-filiais", function (e) {
+        let codigo = $(this).data("codigo");
+        $.ajax({
+            type: "GET",
+            url: "https://localhost:44332/API/Filiais.asmx/ListarFiliais",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            data: `codigoEmpresa=${codigo}`,
+            success: function (data) {
+                window.location.href = `/Pages/Filiais.aspx?codigoEmpresa=${codigo}`;
+            },
+            failure: function (msg) {
+                alert(msg);
+                console.log(codigo);
+            },
+        });
     });
 }
 
@@ -199,7 +174,7 @@ $(document).ready(function () {
     carregarEmpresas();
 
     $(document).on("click", "#btn_salvar", salvar);
-    $(document).on("click", "#btn_salvarEditar", salvarEditar);
+    $(document).on("click", "#btn_salvarEditar", salvar);
 
 
 });

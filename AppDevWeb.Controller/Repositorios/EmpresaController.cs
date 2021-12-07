@@ -9,77 +9,45 @@ namespace AppDevWeb.Controller.Repositorios
 {
     public class EmpresaController
     {
-        public List<Empresa> Empresas = new List<Empresa>();
-
-        public void Salvar(Empresa Emp)
+        public void Salvar(Empresa new_emp)
         {
-            if (GetEmpresa(Emp.codigo) == null)
-                Empresas?.Add(Emp);
+            Empresa empresa = Empresa.GetEmpresa(new_emp.codigo);
+
+            Console.WriteLine(empresa);
+            if (empresa == null)
+            {
+                Empresa.Empresas?.Add(new_emp);
+            }
             else
-                foreach (Empresa empresa in Empresas)
-                    if (empresa.codigo == Emp.codigo)
-                    {
-                        empresa.nome = Emp.nome;
-                        empresa.descricao = Emp.descricao;
-                        //empresa.dataFundacao = Emp.dataFundacao;
-                        empresa.razaoSocial = Emp.razaoSocial;
-                        //empresa.ativa = Emp.ativa;
-                        //empresa.cooperativa = Emp.cooperativa
-                        empresa.funcionarios = Emp.funcionarios;
-                        empresa.faturamento = Emp.faturamento;
-                        empresa.capitalSocial = Emp.capitalSocial;
-                        empresa.inscricaoEstadual = Emp.inscricaoEstadual;
-                        empresa.cnpj = Emp.cnpj;
-                        empresa.cidade = Emp.cidade;
-                        empresa.cep = Emp.cep;
-                        empresa.bairro = Emp.bairro;
-                        empresa.endereco = Emp.endereco;
-                        empresa.descricao = Emp.descricao;
-                        empresa.email = Emp.email;
-                        empresa.telefone = Emp.telefone;
-                    }
+            {
+                empresa.nome = new_emp.nome;
+                empresa.descricao = new_emp.descricao;
+                empresa.dataFundacao = new_emp.dataFundacao;
+                empresa.razaoSocial = new_emp.razaoSocial;
+                empresa.funcionarios = new_emp.funcionarios;
+                empresa.faturamento = new_emp.faturamento;
+                empresa.capitalSocial = new_emp.capitalSocial;
+                empresa.inscricaoEstadual = new_emp.inscricaoEstadual;
+                empresa.cnpj = new_emp.cnpj;
+                empresa.cidade = new_emp.cidade;
+                empresa.cep = new_emp.cep;
+                empresa.bairro = new_emp.bairro;
+                empresa.endereco = new_emp.endereco;
+                empresa.descricao = new_emp.descricao;
+                empresa.email = new_emp.email;
+                empresa.telefone = new_emp.telefone;
+            }   
         }
 
         public List<Empresa> GetEmpresas()
         {
-            return Empresas;
+            return Empresa.Empresas;
         }
 
         public void Remover(long codigo)
         {
-            Empresas = Empresas.Where(o => o.codigo != codigo)
+            Empresa.Empresas = Empresa.Empresas.Where(o => o.codigo != codigo)
                                .ToList();
         }
-
-        public Empresa GetEmpresa(long codigo)
-        {
-            return Empresas.FirstOrDefault(o => o.codigo == codigo);
-        }
-        public void SalvarEditar(Empresa Emp)
-        {
-          
-                foreach (Empresa empresa in Empresas)
-                    if (empresa.codigo == Emp.codigo)
-                    {
-                        empresa.nome = Emp.nome;
-                        empresa.descricao = Emp.descricao;
-                        empresa.dataFundacao = Emp.dataFundacao;
-                        empresa.razaoSocial = Emp.razaoSocial;
-                        //empresa.ativa = Emp.ativa;
-                        //empresa.cooperativa = Emp.cooperativa
-                        empresa.funcionarios = Emp.funcionarios;
-                        empresa.faturamento = Emp.faturamento;
-                        empresa.capitalSocial = Emp.capitalSocial;
-                        empresa.inscricaoEstadual = Emp.inscricaoEstadual;
-                        empresa.cnpj = Emp.cnpj;
-                        empresa.cidade = Emp.cidade;
-                        empresa.cep = Emp.cep;
-                        empresa.bairro = Emp.bairro;
-                        empresa.endereco = Emp.endereco;
-                        empresa.descricao = Emp.descricao;
-                        empresa.email = Emp.email;
-                        empresa.telefone = Emp.telefone;
-                }
-    }
     }
 }

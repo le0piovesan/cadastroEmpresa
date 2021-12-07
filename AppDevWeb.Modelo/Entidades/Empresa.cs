@@ -8,8 +8,6 @@ namespace AppDevWeb.Modelo.Entidades
         public string nome { get; set; }
         public System.DateTime dataFundacao { get; set; }
         public string razaoSocial { get; set; }
-        //public bool ativa { get; set; }
-        //public int cooperativa { get; set; }
         public int funcionarios { get; set; }
         public decimal faturamento { get; set; }
         public decimal capitalSocial { get; set; }
@@ -22,12 +20,38 @@ namespace AppDevWeb.Modelo.Entidades
         public string descricao { get; set; }
         public string email { get; set; }
         public string telefone { get; set; }
-        public List<Filiais> filiais { get; set; }
+        public List<Filial> filiais { get; set; }
 
+        public static List<Empresa> Empresas = new List<Empresa>();
+        
+        public static Empresa GetEmpresa(long codigo)
+        {
+            return Empresas.Find(o => o.codigo == codigo);
+        }
 
+        public Filial GetFilial(long codigo_filial)
+        {
+            Filial filial = filiais.Find(o => o.codigo == codigo_filial);
+            if(filial == null)
+            {
+                return null;
+            }
+            else
+            {
+                return filial;
+            }
+             
+        }
+
+        public bool RemoveFilial(long codigoFilial)
+        {
+            return filiais.Remove(GetFilial(codigoFilial));
+
+        }
 
         public Empresa()
         {
+            filiais = new List<Filial>();
         }
     }
 }

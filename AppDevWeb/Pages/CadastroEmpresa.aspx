@@ -37,26 +37,6 @@ type="text/javascript"></script>
         id="inputRazao"
       />
     </div>
-
-   <%-- <div class="col-sm-2 containerCheckbox">
-      <p>Ativa</p>
-      <input
-        type="checkbox"
-        name="inputAtiva"
-        id="inputAtiva"
-        class="form-check-input"
-      />
-    </div>
-
-    <div class="col-sm-2 containerCheckbox">
-      <p>Cooperativa</p>
-      <input
-        type="checkbox"
-        name="inputCooperativa"
-        id="inputCooperativa"
-        class="form-check-input"
-      />
-    </div>--%>
   </div>
 
   <div class="row">

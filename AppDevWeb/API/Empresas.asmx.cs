@@ -43,7 +43,7 @@ namespace AppDevWeb.API
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public Empresa GetEmpresa(long codigo)
         {
-            return Controller.GetEmpresa(codigo);
+            return Empresa.GetEmpresa(codigo);
         }
 
         [WebMethod(EnableSession = true)]
@@ -58,20 +58,9 @@ namespace AppDevWeb.API
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public string SalvarEmpresa(Empresa emp)
         {
-            Console.WriteLine("Chegou aqui");
-            Console.WriteLine(emp);
             Controller.Salvar(emp);
             return "OK";            
         }
 
-        [WebMethod(EnableSession = true)]
-        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public string SalvarEditarEmpresa(Empresa emp)
-        {
-            Console.WriteLine("Chegou aqui");
-            Console.WriteLine(emp);
-            Controller.SalvarEditar(emp);
-            return "OK";
-        }
     }
 }

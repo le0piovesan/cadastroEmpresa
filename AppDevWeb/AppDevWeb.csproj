@@ -71,9 +71,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="API\Empresas.asmx" />
+    <Content Include="API\Filiais.asmx" />
     <Content Include="Global.asax" />
     <Content Include="Login.aspx" />
     <Content Include="Login.js" />
+    <Content Include="Pages\CadastroFilial.js" />
     <Content Include="Pages\Filiais.aspx" />
     <Content Include="Pages\CadastroEmpresa.aspx" />
     <Content Include="Pages\ListagemEmpresas.aspx" />
@@ -1734,6 +1736,10 @@
   <ItemGroup>
     <Compile Include="API\Empresas.asmx.cs">
       <DependentUpon>Empresas.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="API\Filiais.asmx.cs">
+      <DependentUpon>Filiais.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Global.asax.cs">
