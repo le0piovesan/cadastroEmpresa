@@ -23,30 +23,33 @@
 <body>
     <div class="container-fluid">
         <div id="topo-usuario" class="form-group">
-            <div class="row">
+            <div class="row ">
                 <div id="div-ident-empresa"
-                    class="col-md-10">
+                    class="col-md-12 d-flex flex-row justify-content-evenly align-items-center">
                     <label>SGE</label>
-                </div>
-                <div id="div_ident_user"
+                       <div id="div_ident_user"
                     runat="server"
-                    class="col-md-2">
+                    class="col-md-1">
                 </div>
+                </div>
+              
+            
             </div>
         </div>
          </div>
-        <div id="corpo-pagina">
+
             <div class="form-group">
-                <div class="row">
-                    <div id="menu-lateral" class="col-md-2 d-flex flex-column justify-content-around align-items-center">
-                        <a href="ListagemEmpresas.aspx" class="sideMenuLink"
+                    <div id="menu" class="d-flex flex-row justify-content-evenly ">
+                        <a href="ListagemEmpresas.aspx" class="sideMenuLink btn btn-outline-light"
                             id="ovLink_CadastroProduto">Listagem de Empresas
                         </a>
-                        <a href="CadastroEmpresa.aspx" class="sideMenuLink"
+                        <a href="CadastroEmpresa.aspx" class="sideMenuLink btn btn-outline-light"
                             id="ovLink_CadastroEmpresa">Cadastro de Empresa
                         </a>
                     </div>
-                    <div id="pagina-filha" class="col-md-10 p-5">
+                </div>
+
+                    <div id="pagina-filha" class="p-5">
                         <form id="form1" runat="server">
                             <div>
                                 <asp:ContentPlaceHolder ID="ContentPlaceHolder1"
@@ -55,8 +58,5 @@
                             </div>
                         </form>
                     </div>
-                </div>
-            </div>
-    </div>
 </body>
 </html>

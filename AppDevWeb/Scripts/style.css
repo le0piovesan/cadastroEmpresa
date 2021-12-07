@@ -1,5 +1,32 @@
-.pull-right {
-	text-align: right;
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+
+
+body {
+	background-image: linear-gradient(120deg, #e0ddd2, #a5a1a0);
+	color: #000;
+	font-family: "Poppins", sans-serif;
+	min-height: 100vh;
+}
+
+#menu {
+	padding: 20px;
+	border-bottom: 1px solid #000;
+}
+
+.sideMenuLink {
+	text-decoration: none;
+	color: forestgreen;
+	font-weight: bold;
+	margin-right: 20px;
+}
+
+.sideMenuLink:hover {
+	color: darkcyan;
 }
 
 #ovBTN_Login {
@@ -20,42 +47,8 @@
 }
 
 #div_ident_user {
-	background-color: darkgray;
 	padding: 5px;
 	font-size: 12px;
 	text-align: right;
 }
 
-#menu-lateral{
-	background-color: #ccc;
-}
-
-#pagina-filha{
-	background-color: darkseagreen;
-}
-
-.sideMenuLink {
-	text-decoration: none;
-	color: forestgreen;
-	font-weight: bold;
-}
-
-.sideMenuLink:hover {
-	color: darkcyan;
-}
-
-input[type="checkbox"] {
-	-ms-transform: scale(2); /* IE */
-	-moz-transform: scale(2); /* FF */
-	-webkit-transform: scale(2); /* Safari and Chrome */
-	-o-transform: scale(2); /* Opera */
-	transform: scale(2);
-	margin-left: 10px;
-}
-
-.form-control:focus,
-input[type="checkbox"]:focus {
-	border-color: #5cb85c;
-	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 5px #5cb85c;
-	outline: 0 none;
-}

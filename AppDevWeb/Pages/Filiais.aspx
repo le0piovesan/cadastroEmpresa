@@ -10,6 +10,8 @@
     <script src="CadastroFilial.js"
         type="text/javascript"></script>
 
+    <h3 class="d-flex justify-content-center">Filiais</h3>
+
     <div class="form-group">
   <div class="row">
     <div class="col-sm-2">
@@ -23,7 +25,7 @@
       />
     </div>
     <div class="col-sm-8">
-      <label for="inputNome">Nome Fantasia</label>
+      <label for="inputNome">Nome Filial</label>
       <input class="form-control" type="text" name="inputNome" id="inputFilialNome" />
     </div>
 
@@ -155,16 +157,15 @@
     </div>
   </div>
         </div>
-        <div class="row pull-right" style="padding-top: 20px;">
-            <div class="col-md-12">
+            <div class="col-md-12 d-flex justify-content-end">
                 <button type="button"
                     class="btn btn-xs btn-success"
                     id="btn_salvar">
-                    Salvar</button>
+                    <i class="fa fa-save"></i> 
+                     Salvar</button>
             </div>
-        </div>
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12 m-2">
                 <table id="grid_filiais" class="table">
                     <thead>
                         <tr>
