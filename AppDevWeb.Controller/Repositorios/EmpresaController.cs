@@ -22,7 +22,6 @@ namespace AppDevWeb.Controller.Repositorios
             {
                 empresa.nome = new_emp.nome;
                 empresa.descricao = new_emp.descricao;
-                empresa.dataFundacao = new_emp.dataFundacao;
                 empresa.razaoSocial = new_emp.razaoSocial;
                 empresa.funcionarios = new_emp.funcionarios;
                 empresa.faturamento = new_emp.faturamento;
