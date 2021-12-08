@@ -1,4 +1,6 @@
-﻿if (getCookie("codigoFilial") == "") {
+﻿let editando = false;
+
+if (getCookie("codigoFilial") == "") {
     setCookie("codigoFilial", 1, 7);
 }
 let countFilial = getCookie("codigoFilial");
@@ -24,6 +26,50 @@ function getCookie(cname) {
         }
     }
     return "";
+}
+function masterSave() {
+    if (!editando) {
+         salvar();
+    }
+    else {
+        salvarEditado();
+    }
+}
+function salvarEditado() {
+    var url_string = window.location.href;
+    var url = new URL(url_string);
+    var codigo = url.searchParams.get("codigoEmpresa");
+    $.ajax({
+        type: "POST",
+        url: "https://localhost:44332/API/Filiais.asmx/SalvarFilial",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (data) {
+            limparCampos();
+            carregarFiliais();
+        },
+        failure: function (msg) { console.log(msg); },
+        data: JSON.stringify({
+            codigoMatriz: codigo,
+            filial: {
+                codigo: $("#inputFilialCod").val(),
+                nome: $("#inputFilialNome").val(),
+                razaoSocial: $("#inputFilialRazao").val(),
+                funcionarios: $("#inputFilialFuncionarios").val(),
+                faturamento: $("#inputFilialFaturamento").val(),
+                capitalSocial: $("#inputFilialCapital").val(),
+                inscricaoEstadual: $("#inputFilialInscricao").val(),
+                cnpj: $("#inputFilialCNPJ").val(),
+                cidade: $("#inputFilialCidade").val(),
+                cep: $("#inputFilialCEP").val(),
+                bairro: $("#inputFilialBairro").val(),
+                endereco: $("#inputFilialEndereco").val(),
+                descricao: $("#inputFilialDescricao").val(),
+                email: $("#inputFilialEmail").val(),
+                telefone: $("#inputFilialTelefone").val(),
+            },
+        })
+    });
 }
 
 function salvar() {
@@ -134,6 +180,8 @@ function adicionaEventoEditar() {
     var codigoMatriz = url.searchParams.get("codigoEmpresa");
 
     $(document).on("click", ".btn-editar-filial", function () {
+        editando = true;
+
         var codigoFilial = $(this).data("codigo");
         $.ajax({
             type: "GET",
@@ -196,7 +244,8 @@ function adicionaEventoRemover() {
 
 $(document).ready(function () {
     carregarFiliais();
-    $(document).on("click", "#btn_salvar", salvar);
+    
+    $(document).on("click", "#btn_salvar", masterSave);
 
 });
 

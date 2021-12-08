@@ -1,9 +1,9 @@
 ﻿let quantidadeEmpresas = 0;
 
-
 if (getCookie("codigoEmp") == "") {
     setCookie("codigoEmp", 1, 7);
 }
+
 let countEmp = getCookie("codigoEmp");
 
 function setCookie(cname, cvalue, exdays) {
@@ -51,6 +51,41 @@ function verificarEmpresas() {
         });
 }
 
+function salvarEditado() {
+    $.ajax({
+        type: "POST",
+        url: "https://localhost:44332/API/Empresas.asmx/SalvarEmpresa",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (data) {
+            limparCampos();
+            carregarEmpresas();
+            $("#modalEditar").modal("hide");
+
+        },
+        failure: function (msg) { console.log(msg); },
+        data: JSON.stringify({
+            emp: {
+                codigo: $("#inputCod").val(),
+                nome: $("#inputNome").val(),
+                razaoSocial: $("#inputRazao").val(),
+                funcionarios: $("#inputFuncionarios").val(),
+                faturamento: $("#inputFaturamento").val(),
+                capitalSocial: $("#inputCapital").val(),
+                inscricaoEstadual: $("#inputInscricao").val(),
+                cnpj: $("#inputCNPJ").val(),
+                cidade: $("#inputCidade").val(),
+                cep: $("#inputCEP").val(),
+                bairro: $("#inputBairro").val(),
+                endereco: $("#inputEndereco").val(),
+                descricao: $("#inputDescricao").val(),
+                email: $("#inputEmail").val(),
+                telefone: $("#inputTelefone").val(),
+            },
+        })
+    });
+}
+
 function salvar() {
     $.ajax({
         type: "POST",
@@ -59,10 +94,11 @@ function salvar() {
         dataType: "json",
         success: function (data) {
             countEmp = parseInt(countEmp) + 1;
+            
             setCookie("codigoEmp", countEmp, 7);
+           
             limparCampos();
             carregarEmpresas();
-            $("#modalEditar").modal("hide");
         },
         failure: function (msg) { console.log(msg); },
         data: JSON.stringify({
@@ -154,8 +190,7 @@ function carregarEmpresas() {
 function adicionaEventoEditar() {
     $(document).on("click", ".btn-editar", function () {
         var codigo = $(this).data("codigo");
-
-
+        console.log("meu pinto", codigo)
         $.ajax({
             type: "POST",
             url: "https://localhost:44332/API/Empresas.asmx/GetEmpresa",
@@ -164,6 +199,7 @@ function adicionaEventoEditar() {
             dataType: "json",
             success: function (data) {
                 $("#modalEditar").modal("show");
+                
 
                 var Empresa = data.d
                 console.log(Empresa);
@@ -234,10 +270,11 @@ $(document).ready(function () {
     carregarEmpresas();
     
     $(document).on("click", "#btn_salvar", salvar);
-    $(document).on("click", "#btn_salvarEditar", salvar);
+    $(document).on("click", "#btn_salvarEditar", salvarEditado);
 
 
 });
+
 
 function convertToJavaScriptDate(value) {
     var pattern = /Date\(([^)]+)\)/;
