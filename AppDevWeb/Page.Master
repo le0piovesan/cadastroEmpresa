@@ -40,10 +40,10 @@
 
             <div class="form-group">
                     <div id="menu" class="d-flex flex-row justify-content-evenly ">
-                        <a href="ListagemEmpresas.aspx" class="sideMenuLink btn btn-outline-light"
+                        <a href="ListagemEmpresas.aspx" class="sideMenuLink btn btn-outline-success"
                             id="ovLink_CadastroProduto">Listagem de Empresas
                         </a>
-                        <a href="CadastroEmpresa.aspx" class="sideMenuLink btn btn-outline-light"
+                        <a href="CadastroEmpresa.aspx" class="sideMenuLink btn btn-outline-success"
                             id="ovLink_CadastroEmpresa">Cadastro de Empresa
                         </a>
                     </div>

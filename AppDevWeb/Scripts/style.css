@@ -25,10 +25,6 @@ body {
 	margin-right: 20px;
 }
 
-.sideMenuLink:hover {
-	color: darkcyan;
-}
-
 #ovBTN_Login {
 	margin-top: 10px;	
 }
